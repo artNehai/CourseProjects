@@ -9,10 +9,13 @@ import com.example.tiptime.ui.MainScreen
 import com.example.tiptime.ui.theme.TipTimeTheme
 
 @Composable
-fun Application() {
+fun Application(
+    billAmount: String,
+) {
     Scaffold { paddingValues ->
         MainScreen(
             modifier = Modifier.padding(paddingValues),
+            billAmount = billAmount,
         )
     }
 }
@@ -21,6 +24,6 @@ fun Application() {
 @Composable
 fun ApplicationPreview() {
     TipTimeTheme {
-        Application()
+        Application("")
     }
 }

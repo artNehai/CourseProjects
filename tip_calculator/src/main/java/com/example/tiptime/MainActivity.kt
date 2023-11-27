@@ -4,15 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import com.example.tiptime.ui.theme.TipTimeTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel by viewModels<CalculatorViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             TipTimeTheme {
-                Application()
+                Application(
+                    billAmount = viewModel.billAmount,
+                )
             }
         }
     }
