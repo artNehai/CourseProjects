@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -14,15 +15,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tiptime.R
 import com.example.tiptime.ui.theme.TipTimeTheme
-import java.text.NumberFormat
 
 @Composable
 fun MainScreen(
     billAmount: String,
+    tipAmount: String,
+    onBillAmountChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -41,17 +44,20 @@ fun MainScreen(
 
         TextField(
             value = billAmount,
-            onValueChange = {},
+            onValueChange = onBillAmountChange,
             modifier = modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth(),
             label = {
                 Text(stringResource(R.string.bill_amount))
             },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Decimal,
+            ),
         )
 
         Text(
-            text = stringResource(R.string.tip_amount, "$0.00"),
+            text = stringResource(R.string.tip_amount, tipAmount),
             style = MaterialTheme.typography.displaySmall,
         )
 
@@ -59,15 +65,14 @@ fun MainScreen(
     }
 }
 
-private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
-    val tip = tipPercent / 100 * amount
-    return NumberFormat.getCurrencyInstance().format(tip)
-}
-
 @Preview(showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
     TipTimeTheme {
-        MainScreen("")
+        MainScreen(
+            billAmount = "",
+            tipAmount = "",
+            onBillAmountChange = {},
+        )
     }
 }

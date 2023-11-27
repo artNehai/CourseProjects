@@ -11,11 +11,15 @@ import com.example.tiptime.ui.theme.TipTimeTheme
 @Composable
 fun Application(
     billAmount: String,
+    tipAmount: String,
+    onBillAmountChange: (String) -> Unit,
 ) {
     Scaffold { paddingValues ->
         MainScreen(
-            modifier = Modifier.padding(paddingValues),
             billAmount = billAmount,
+            tipAmount = tipAmount,
+            onBillAmountChange = onBillAmountChange,
+            modifier = Modifier.padding(paddingValues),
         )
     }
 }
@@ -24,6 +28,10 @@ fun Application(
 @Composable
 fun ApplicationPreview() {
     TipTimeTheme {
-        Application("")
+        Application(
+            billAmount = "",
+            tipAmount = "",
+            onBillAmountChange = {},
+        )
     }
 }

@@ -18,6 +18,10 @@ class MainActivity : ComponentActivity() {
             TipTimeTheme {
                 Application(
                     billAmount = viewModel.billAmount,
+                    tipAmount = viewModel.tipAmount,
+                    onBillAmountChange = { newAmount ->
+                        viewModel.changeBillAmount(newAmount)
+                    }
                 )
             }
         }
