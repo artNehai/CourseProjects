@@ -12,7 +12,7 @@ import com.example.tiptime.ui.theme.TipTimeTheme
 fun Application() {
     Scaffold { paddingValues ->
         MainScreen(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues),
         )
     }
 }

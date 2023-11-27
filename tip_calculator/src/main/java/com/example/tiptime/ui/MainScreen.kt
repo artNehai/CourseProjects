@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,9 +25,7 @@ fun MainScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .statusBarsPadding()
-            .padding(horizontal = 40.dp)
-            .safeDrawingPadding(),
+            .padding(horizontal = 40.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
