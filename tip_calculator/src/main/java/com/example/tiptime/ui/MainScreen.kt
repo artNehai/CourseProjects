@@ -45,7 +45,7 @@ fun MainScreen(
         TextField(
             value = billAmount,
             onValueChange = onBillAmountChange,
-            modifier = modifier
+            modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth(),
             label = {
@@ -54,6 +54,7 @@ fun MainScreen(
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Decimal,
             ),
+            singleLine = true,
         )
 
         Text(
