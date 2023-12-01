@@ -9,7 +9,7 @@ import com.example.tiptime.ui.theme.TipTimeTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<CalculatorViewModel>()
+    private val calculatorViewModel by viewModels<CalculatorViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -17,11 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TipTimeTheme {
                 Application(
-                    billAmount = viewModel.billAmount,
-                    tipAmount = viewModel.tipAmount,
-                    onBillAmountChange = { newAmount ->
-                        viewModel.changeBillAmount(newAmount)
-                    }
+                    viewModel = calculatorViewModel,
                 )
             }
         }

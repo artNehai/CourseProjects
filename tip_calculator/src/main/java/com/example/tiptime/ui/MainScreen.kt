@@ -21,15 +21,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.tiptime.CalculatorViewModel
 import com.example.tiptime.R
 import com.example.tiptime.ui.theme.TipTimeTheme
 
 @Composable
 fun MainScreen(
-    billAmount: String,
-    tipAmount: String,
-    onBillAmountChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: CalculatorViewModel = viewModel(),
 ) {
     Column(
         modifier = modifier
@@ -47,8 +47,8 @@ fun MainScreen(
         )
 
         TextField(
-            value = billAmount,
-            onValueChange = onBillAmountChange,
+            value = viewModel.billAmount,
+            onValueChange = { viewModel.changeBillAmount(it) },
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth(),
@@ -62,7 +62,7 @@ fun MainScreen(
         )
 
         Text(
-            text = stringResource(R.string.tip_amount, tipAmount),
+            text = stringResource(R.string.tip_amount, viewModel.tipAmount),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.displaySmall,
         )
@@ -75,10 +75,6 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     TipTimeTheme {
-        MainScreen(
-            billAmount = "",
-            tipAmount = "",
-            onBillAmountChange = {},
-        )
+        MainScreen()
     }
 }
