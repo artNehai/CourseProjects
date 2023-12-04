@@ -13,7 +13,7 @@ import com.example.tiptime.ui.theme.TipTimeTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Application(
+fun CalculatorApp(
     modifier: Modifier = Modifier,
     viewModel: CalculatorViewModel = viewModel(),
 ) {
@@ -29,8 +29,8 @@ fun Application(
 
 @Preview(showSystemUi = true)
 @Composable
-fun ApplicationPreview() {
+fun CalculatorAppPreview() {
     TipTimeTheme {
-        Application()
+        CalculatorApp()
     }
 }
