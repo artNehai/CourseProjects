@@ -46,19 +46,16 @@ fun MainScreen(
                 .align(alignment = Alignment.Start),
         )
 
-        TextField(
+        EditNumberField(
             value = viewModel.billAmount,
             onValueChange = { viewModel.changeBillAmount(it) },
-            modifier = Modifier
-                .padding(bottom = 32.dp)
-                .fillMaxWidth(),
-            label = {
-                Text(stringResource(R.string.bill_amount))
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Decimal,
-            ),
-            singleLine = true,
+            label = { Text(stringResource(R.string.bill_amount)) },
+        )
+
+        EditNumberField(
+            value = viewModel.tipPercentage,
+            onValueChange = { viewModel.changeTipPercentage(it) },
+            label = { Text(stringResource(R.string.tip_percentage)) },
         )
 
         Text(
@@ -69,6 +66,27 @@ fun MainScreen(
 
         Spacer(modifier = Modifier.height(150.dp))
     }
+}
+
+@Composable
+fun EditNumberField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    label: @Composable (() -> Unit)? = null,
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier
+            .padding(bottom = 32.dp)
+            .fillMaxWidth(),
+        label = label,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Decimal,
+        ),
+        singleLine = true,
+    )
 }
 
 @Preview(showSystemUi = true)
