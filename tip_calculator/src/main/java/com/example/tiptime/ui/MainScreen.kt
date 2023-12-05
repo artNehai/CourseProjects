@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,16 +47,32 @@ fun MainScreen(
                 .align(alignment = Alignment.Start),
         )
 
-        EditNumberField(
+        TextField(
             value = viewModel.billAmount,
             onValueChange = { viewModel.changeBillAmount(it) },
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth(),
             label = { Text(stringResource(R.string.bill_amount)) },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Decimal,
+                imeAction = ImeAction.Next,
+            ),
+            singleLine = true,
         )
 
-        EditNumberField(
+        TextField(
             value = viewModel.tipPercentage,
             onValueChange = { viewModel.changeTipPercentage(it) },
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth(),
             label = { Text(stringResource(R.string.tip_percentage)) },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Decimal,
+                imeAction = ImeAction.Done,
+            ),
+            singleLine = true,
         )
 
         Text(
@@ -66,27 +83,6 @@ fun MainScreen(
 
         Spacer(modifier = Modifier.height(150.dp))
     }
-}
-
-@Composable
-fun EditNumberField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    label: @Composable (() -> Unit)? = null,
-) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier
-            .padding(bottom = 32.dp)
-            .fillMaxWidth(),
-        label = label,
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Decimal,
-        ),
-        singleLine = true,
-    )
 }
 
 @Preview(showSystemUi = true)
