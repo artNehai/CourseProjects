@@ -5,16 +5,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import java.text.NumberFormat
+import kotlin.math.round
 
 class CalculatorViewModel : ViewModel() {
 
     var billAmount by mutableStateOf("")
         private set
 
-    var tipPercentage by mutableStateOf("")
+    var tipPercent by mutableStateOf("")
         private set
 
     var tipAmount by mutableStateOf(ZERO_TIP)
+        private set
+
+    var roundUp by mutableStateOf(false)
         private set
 
     fun changeBillAmount(newAmount: String) {
@@ -33,21 +37,30 @@ class CalculatorViewModel : ViewModel() {
     fun changeTipPercentage(newPercentage: String) {
         try {
             val percentage = newPercentage.toDouble()
-            tipPercentage = newPercentage
+            tipPercent = newPercentage
             tipAmount = calculateTip(tipPercent = percentage)
         } catch (_: NumberFormatException) {
             if (newPercentage.isBlank()) {
-                tipPercentage = newPercentage
+                tipPercent = newPercentage
                 tipAmount = calculateTip()
             }
         }
     }
 
+    fun onRoundUpChange(newValue: Boolean) {
+        roundUp = newValue
+        tipAmount = calculateTip()
+    }
+
     private fun calculateTip(
         amount: Double = billAmount.toDoubleOrNull() ?: 0.0,
-        tipPercent: Double = this.tipPercentage.toDoubleOrNull() ?: DEFAULT_TIP_PERCENT,
+        tipPercent: Double = this.tipPercent.toDoubleOrNull() ?: DEFAULT_TIP_PERCENT,
+        roundUp: Boolean = this.roundUp,
     ): String {
-        val tip = tipPercent / 100 * amount
+        var tip = tipPercent / 100 * amount
+        if (roundUp) {
+            tip = round(tip)
+        }
         return NumberFormat.getCurrencyInstance().format(tip)
     }
 }
