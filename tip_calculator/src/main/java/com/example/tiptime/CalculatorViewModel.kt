@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import java.text.NumberFormat
-import kotlin.math.round
+import kotlin.math.ceil
 
 class CalculatorViewModel : ViewModel() {
 
@@ -59,7 +59,7 @@ class CalculatorViewModel : ViewModel() {
     ): String {
         var tip = tipPercent / 100 * amount
         if (roundUp) {
-            tip = round(tip)
+            tip = ceil(tip)
         }
         return NumberFormat.getCurrencyInstance().format(tip)
     }
