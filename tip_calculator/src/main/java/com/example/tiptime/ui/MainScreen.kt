@@ -88,6 +88,7 @@ fun MainScreen(
         )
 
         Row(
+            modifier = Modifier.padding(bottom = 32.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(stringResource(R.string.round_up_tip))
