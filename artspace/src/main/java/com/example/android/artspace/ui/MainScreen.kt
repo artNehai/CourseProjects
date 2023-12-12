@@ -30,7 +30,7 @@ fun MainScreen(
             shadowElevation = 16.dp,
         ) {
             Image(
-                painter = painterResource(R.drawable.flora_rembrandt),
+                painter = painterResource(R.drawable.the_lover_letter_fragonard),
                 contentDescription = null,
                 modifier = Modifier.padding(36.dp),
             )
