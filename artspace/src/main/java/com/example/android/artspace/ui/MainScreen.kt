@@ -62,15 +62,19 @@ fun MainScreen(
             ) {
                 Text(
                     text = stringResource(R.string.love_letter),
+                    fontWeight = FontWeight.Light,
                     style = MaterialTheme.typography.bodyLarge,
                 )
+
                 Row {
                     Text(
                         text = stringResource(R.string.fragonard),
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.bodySmall,
                     )
+
                     Spacer(modifier = Modifier.width(4.dp))
+
                     Text(
                         text = stringResource(R.string.love_letter_date),
                         fontWeight = FontWeight.Light,
