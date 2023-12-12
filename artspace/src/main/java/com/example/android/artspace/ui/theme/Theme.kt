@@ -27,7 +27,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun CourseProjectsTheme(
+fun ArtSpaceTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit,
