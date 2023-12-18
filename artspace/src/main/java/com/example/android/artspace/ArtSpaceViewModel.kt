@@ -30,8 +30,20 @@ class ArtSpaceViewModel : ViewModel() {
         ),
     )
 
-    var currentPainting by mutableStateOf(paintings[0])
+    var currentPainting by mutableStateOf(paintings.first())
         private set
+
+    fun nextPainting() {
+        if (currentPainting == paintings.last()) return
+        val currentIndex = paintings.indexOf(currentPainting)
+        currentPainting = paintings[currentIndex + 1]
+    }
+
+    fun previousPainting() {
+        if (currentPainting == paintings.first()) return
+        val currentIndex = paintings.indexOf(currentPainting)
+        currentPainting = paintings[currentIndex - 1]
+    }
 
     data class PaintingBundle(
         @DrawableRes val imageId: Int,

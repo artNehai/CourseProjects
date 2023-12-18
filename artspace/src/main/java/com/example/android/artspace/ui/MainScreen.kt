@@ -96,12 +96,12 @@ fun MainScreen(
                 .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.Start,
         ) {
-            NavigationButton(onClick = {}) {
+            NavigationButton(onClick = { viewModel.previousPainting() }) {
                 Text("Previous")
             }
 
             NavigationButton(
-                onClick = {},
+                onClick = { viewModel.nextPainting() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentWidth(Alignment.End),
