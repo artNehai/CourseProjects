@@ -2,14 +2,14 @@
     <string name="app_name">Art Space</string>
 
     <string name="love_letter">The Love Letter</string>
-    <string name="love_letter_date">(early 1770s)</string>
     <string name="fragonard">Jean Honoré Fragonard</string>
+    <string name="love_letter_date">(early 1770s)</string>
 
     <string name="planets_and_continents">Allegory of the Planets and Continents</string>
-    <string name="planets_and_continents_date">(1752)</string>
     <string name="tiepolo">Giovanni Battista Tiepolo</string>
+    <string name="planets_and_continents_date">(1752)</string>
 
     <string name="madonna">Head of the Madonna</string>
-    <string name="madonna_date">(ca. 1509)</string>
     <string name="franciabigio">Franciabigio (Francesco di Cristofano)</string>
+    <string name="madonna_date">(ca. 1509)</string>
 </resources>

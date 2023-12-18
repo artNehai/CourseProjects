@@ -26,12 +26,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.android.artspace.R
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.android.artspace.ArtSpaceViewModel
 import com.example.android.artspace.ui.theme.ArtSpaceTheme
 
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
+    viewModel: ArtSpaceViewModel = viewModel(),
 ) {
     Column(
         modifier = modifier
@@ -49,7 +51,7 @@ fun MainScreen(
             shadowElevation = 16.dp,
         ) {
             Image(
-                painter = painterResource(R.drawable.the_love_letter_fragonard),
+                painter = painterResource(viewModel.currentPainting.imageId),
                 contentDescription = null,
                 modifier = Modifier.padding(36.dp),
             )
@@ -63,14 +65,14 @@ fun MainScreen(
                 modifier = Modifier.padding(16.dp),
             ) {
                 Text(
-                    text = stringResource(R.string.love_letter),
+                    text = stringResource(viewModel.currentPainting.titleId),
                     fontWeight = FontWeight.Light,
                     style = MaterialTheme.typography.bodyLarge,
                 )
 
                 Row {
                     Text(
-                        text = stringResource(R.string.fragonard),
+                        text = stringResource(viewModel.currentPainting.authorId),
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.bodySmall,
                     )
@@ -78,7 +80,7 @@ fun MainScreen(
                     Spacer(modifier = Modifier.width(4.dp))
 
                     Text(
-                        text = stringResource(R.string.love_letter_date),
+                        text = stringResource(viewModel.currentPainting.creationDateId),
                         fontWeight = FontWeight.Light,
                         style = MaterialTheme.typography.bodySmall,
                     )
