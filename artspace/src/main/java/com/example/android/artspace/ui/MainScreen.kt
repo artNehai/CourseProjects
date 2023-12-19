@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
@@ -23,7 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -70,21 +72,20 @@ fun MainScreen(
                     style = MaterialTheme.typography.bodyLarge,
                 )
 
-                Row {
-                    Text(
-                        text = stringResource(viewModel.currentPainting.authorId),
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-
-                    Spacer(modifier = Modifier.width(4.dp))
-
-                    Text(
-                        text = stringResource(viewModel.currentPainting.creationDateId),
-                        fontWeight = FontWeight.Light,
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                }
+                Text(
+                    text = buildAnnotatedString {
+                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                            append(stringResource(viewModel.currentPainting.authorId))
+                            append(" ")
+                        }
+                        withStyle(SpanStyle(fontWeight = FontWeight.Light)) {
+                            append(stringResource(viewModel.currentPainting.creationDateId))
+                            append(" ")
+                        }
+                        toAnnotatedString()
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                )
             }
         }
 
