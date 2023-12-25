@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,10 +29,9 @@ fun ArtSpaceApp(
         bottomBar = {
             Row(
                 modifier = Modifier
-                    .padding(
-                        horizontal = 8.dp,
-                        vertical = 16.dp,
-                    ),
+                    .safeDrawingPadding()
+                    .padding(horizontal = 8.dp)
+                    .padding(bottom = 16.dp),
                 horizontalArrangement = Arrangement.Start,
             ) {
                 NavigationButton(onClick = { viewModel.previousPainting() }) {
@@ -51,8 +51,8 @@ fun ArtSpaceApp(
     ) { innerPadding ->
         MainScreen(
             modifier = modifier
-                .consumeWindowInsets(innerPadding)
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .consumeWindowInsets(innerPadding),
             viewModel = viewModel,
         )
     }
