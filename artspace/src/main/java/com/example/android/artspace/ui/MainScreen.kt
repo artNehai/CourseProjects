@@ -1,6 +1,7 @@
 package com.example.android.artspace.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -46,7 +47,9 @@ fun MainScreen(
             modifier = Modifier.width(IntrinsicSize.Min),
         ) {
             Surface(
-                modifier = Modifier.width(PaintingWidth),
+                modifier = Modifier
+                    .width(PaintingWidth)
+                    .clickable { viewModel.nextPainting() },
                 shadowElevation = 16.dp,
             ) {
                 Image(
