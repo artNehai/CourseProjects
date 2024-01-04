@@ -14,5 +14,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CourseProjects"
-include(":tip_calculator")
 include(":artspace")
+include(":tip_calculator")
+include(":affirmations")
