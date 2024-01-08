@@ -17,3 +17,4 @@ rootProject.name = "CourseProjects"
 include(":artspace")
 include(":tip_calculator")
 include(":affirmations")
+include(":courses")
