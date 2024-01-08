@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="architecture_courses">58</integer>
+    <integer name="crafts_courses">121</integer>
+    <integer name="business_courses">78</integer>
+    <integer name="culinary_courses">118</integer>
+    <integer name="design_courses">423</integer>
+    <integer name="fashion_courses">92</integer>
+    <integer name="film_courses">165</integer>
+    <integer name="gaming_courses">164</integer>
+    <integer name="drawing_courses">326</integer>
+    <integer name="lifestyle_courses">305</integer>
+    <integer name="music_courses">212</integer>
+    <integer name="painting_courses">172</integer>
+    <integer name="photography_courses">321</integer>
+    <integer name="tech_courses">118</integer>
+</resources>
