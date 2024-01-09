@@ -4,11 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,22 +24,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.courses.R
 import com.example.android.courses.data.Datasource
-import com.example.android.courses.model.Course
+import com.example.android.courses.model.CourseTopic
 import com.example.android.courses.ui.theme.CourseProjectsTheme
 
 @Composable
 fun Topic(
-    course: Course,
+    topic: CourseTopic,
     modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = modifier.wrapContentSize(),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(percent = 20),
         color = MaterialTheme.colorScheme.secondaryContainer,
     ) {
         Row {
             Image(
-                painter = painterResource(course.image),
+                painter = painterResource(topic.image),
                 contentDescription = null,
                 modifier = Modifier.size(68.dp),
             )
@@ -50,7 +50,7 @@ fun Topic(
                     .padding(top = 16.dp),
             ) {
                 Text(
-                    text = stringResource(course.description),
+                    text = stringResource(topic.description),
                     style = MaterialTheme.typography.bodyMedium,
                 )
 
@@ -65,7 +65,7 @@ fun Topic(
                     Spacer(Modifier.width(8.dp))
 
                     Text(
-                        text = integerResource(course.coursesQnt).toString(),
+                        text = integerResource(topic.coursesQnt).toString(),
                         modifier = Modifier.align(Alignment.CenterVertically),
                         style = MaterialTheme.typography.labelMedium,
                     )
@@ -79,6 +79,6 @@ fun Topic(
 @Composable
 fun TopicPreview() {
     CourseProjectsTheme {
-        Topic(course = Datasource.courses.first())
+        Topic(topic = Datasource.topics.first())
     }
 }
