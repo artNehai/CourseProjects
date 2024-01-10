@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WoofTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
                 ) {
                     WoofApp()
                 }
@@ -55,13 +56,17 @@ fun DogItem(
     dog: Dog,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.padding_small))
+    Card(
+        modifier = modifier.padding(dimensionResource(R.dimen.padding_small)),
     ) {
-        DogIcon(dog.imageResourceId)
-        DogInformation(dog.name, dog.age)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_small)),
+        ) {
+            DogIcon(dog.imageResourceId)
+            DogInformation(dog.name, dog.age)
+        }
     }
 }
 
@@ -75,7 +80,7 @@ fun DogIcon(
             .size(dimensionResource(R.dimen.image_size))
             .padding(dimensionResource(R.dimen.padding_small)),
         painter = painterResource(dogIcon),
-        contentDescription = null
+        contentDescription = null,
     )
 }
 
@@ -88,7 +93,7 @@ fun DogInformation(
     Column(modifier = modifier) {
         Text(
             text = stringResource(dogName),
-            modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small))
+            modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small)),
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
