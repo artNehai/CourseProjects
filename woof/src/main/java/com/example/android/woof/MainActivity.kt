@@ -12,17 +12,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.KeyboardArrowDown
+import androidx.compose.material.icons.sharp.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -91,6 +101,8 @@ fun DogItem(
     dog: Dog,
     modifier: Modifier = Modifier,
 ) {
+    var isExpanded by rememberSaveable { mutableStateOf(false) }
+
     Card(
         modifier = modifier.padding(dimensionResource(R.dimen.padding_small)),
     ) {
@@ -100,7 +112,37 @@ fun DogItem(
                 .padding(dimensionResource(R.dimen.padding_small)),
         ) {
             DogIcon(dog.imageResourceId)
+
             DogInformation(dog.name, dog.age)
+
+            IconButton(
+                onClick = { isExpanded = !isExpanded },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.End),
+            ) {
+                Icon(
+                    imageVector = if (isExpanded) {
+                        Icons.Sharp.KeyboardArrowUp
+                    } else {
+                        Icons.Sharp.KeyboardArrowDown
+                    },
+                    contentDescription = stringResource(R.string.expand_button_content_description),
+                    tint = MaterialTheme.colorScheme.secondary,
+                )
+            }
+        }
+
+        if (isExpanded) {
+            DogHobby(
+                hobby = dog.hobby,
+                modifier = Modifier
+                    .padding(horizontal = dimensionResource(R.dimen.padding_medium))
+                    .padding(
+                        top = dimensionResource(R.dimen.padding_small),
+                        bottom = dimensionResource(R.dimen.padding_medium),
+                    )
+            )
         }
     }
 }
@@ -135,6 +177,25 @@ fun DogInformation(
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
+            style = MaterialTheme.typography.bodyLarge,
+        )
+    }
+}
+
+@Composable
+fun DogHobby(
+    @StringRes hobby: Int,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+    ) {
+        Text(
+            text = stringResource(R.string.about),
+            style = MaterialTheme.typography.labelSmall,
+        )
+        Text(
+            text = stringResource(hobby),
             style = MaterialTheme.typography.bodyLarge,
         )
     }
