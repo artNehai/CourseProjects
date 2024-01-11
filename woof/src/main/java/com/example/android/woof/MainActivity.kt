@@ -5,6 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.KeyboardArrowDown
 import androidx.compose.material.icons.sharp.KeyboardArrowUp
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -103,8 +108,24 @@ fun DogItem(
 ) {
     var isExpanded by rememberSaveable { mutableStateOf(false) }
 
+    val color by animateColorAsState(
+        targetValue = if (isExpanded) {
+            MaterialTheme.colorScheme.tertiaryContainer
+        } else {
+            MaterialTheme.colorScheme.primaryContainer
+        },
+        label = "Card's background color animation",
+    )
+
     Card(
-        modifier = modifier.padding(dimensionResource(R.dimen.padding_small)),
+        modifier = modifier
+            .padding(dimensionResource(R.dimen.padding_small))
+            .animateContentSize(
+                animationSpec = spring(
+                    stiffness = Spring.StiffnessMedium,
+                ),
+            ),
+        colors = CardDefaults.cardColors(containerColor = color)
     ) {
         Row(
             modifier = Modifier
