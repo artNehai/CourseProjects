@@ -21,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +37,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.android.racetracker.R
 import com.example.android.racetracker.ui.theme.RaceTrackerTheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun RaceTrackerApp() {
@@ -51,6 +54,16 @@ fun RaceTrackerApp() {
         RaceParticipant(name = "Player 2", progressIncrement = 2)
     }
     var raceInProgress by remember { mutableStateOf(false) }
+
+    if (raceInProgress) {
+        LaunchedEffect(playerOne, playerTwo) {
+            coroutineScope {
+                launch { playerOne.run() }
+                launch { playerTwo.run() }
+            }
+            raceInProgress = false
+        }
+    }
 
     RaceTrackerScreen(
         playerOne = playerOne,
@@ -72,7 +85,7 @@ private fun RaceTrackerScreen(
     playerTwo: RaceParticipant,
     isRunning: Boolean,
     onRunStateChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
@@ -121,9 +134,9 @@ private fun RaceTrackerScreen(
                 isRunning = isRunning,
                 onRunStateChange = onRunStateChange,
                 onReset = {
+                    onRunStateChange(false)
                     playerOne.reset()
                     playerTwo.reset()
-                    onRunStateChange(false)
                 },
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -137,7 +150,7 @@ private fun StatusIndicator(
     currentProgress: Int,
     maxProgress: String,
     progressFactor: Float,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
