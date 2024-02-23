@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.marsphotos.ui.screens
+package com.example.android.marsphotos.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.android.marsphotos.model.MarsUiState
+import com.example.android.marsphotos.network.MarsApi
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class MarsViewModel : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
-    var marsUiState: String by mutableStateOf("")
+    var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
 
     /**
@@ -37,6 +42,14 @@ class MarsViewModel : ViewModel() {
      * [MarsPhoto] [List] [MutableList].
      */
     fun getMarsPhotos() {
-        marsUiState = "Set the Mars API status response here!"
+        viewModelScope.launch {
+            marsUiState = MarsUiState.Loading
+            marsUiState = try {
+                val resultList = MarsApi.retrofitService.getPhotos()
+                MarsUiState.Success(resultList)
+            } catch (e: IOException) {
+                MarsUiState.Error
+            }
+        }
     }
 }

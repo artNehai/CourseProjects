@@ -18,7 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android.marsphotos.R
 import com.example.android.marsphotos.ui.screens.HomeScreen
-import com.example.android.marsphotos.ui.screens.MarsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
