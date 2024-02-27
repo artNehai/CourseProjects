@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android.marsphotos.R
-import com.example.android.marsphotos.model.MarsUiState
+import com.example.android.marsphotos.ui.components.MarsUiState
 import com.example.android.marsphotos.ui.theme.MarsPhotosTheme
 
 @Composable

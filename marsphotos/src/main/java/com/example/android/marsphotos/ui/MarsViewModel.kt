@@ -26,7 +26,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.android.marsphotos.MarsPhotosApplication
 import com.example.android.marsphotos.data.MarsPhotosRepository
-import com.example.android.marsphotos.model.MarsUiState
+import com.example.android.marsphotos.ui.components.MarsUiState
 import kotlinx.coroutines.launch
 import java.io.IOException
 

@@ -1,4 +1,4 @@
-package com.example.android.marsphotos.model
+package com.example.android.marsphotos.ui.components
 
 sealed interface MarsUiState {
     data class Success(val photos: String) : MarsUiState
