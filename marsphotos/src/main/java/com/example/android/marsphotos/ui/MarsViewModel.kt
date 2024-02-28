@@ -62,10 +62,7 @@ class MarsViewModel(
         viewModelScope.launch {
             marsUiState = MarsUiState.Loading
             marsUiState = try {
-                val resultList = marsPhotosRepository.getMarsPhotos()
-                MarsUiState.Success(
-                    "Success: ${resultList.size} Mars photos retrieved"
-                )
+                MarsUiState.Success(marsPhotosRepository.getMarsPhotos())
             } catch (e: IOException) {
                 MarsUiState.Error
             }
