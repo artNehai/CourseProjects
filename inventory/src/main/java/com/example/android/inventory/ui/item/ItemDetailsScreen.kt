@@ -78,9 +78,10 @@ fun ItemDetailsScreen(
             }
         }, modifier = modifier
     ) { innerPadding ->
+        val uiState by viewModel.uiState.collectAsState()
         ItemDetailsBody(
-            itemDetailsUiState = viewModel.uiState.collectAsState().value,
-            onSellItem = { },
+            itemDetailsUiState = uiState,
+            onSellItem = viewModel::reduceQuantityByOne,
             onDelete = { },
             modifier = Modifier
                 .padding(innerPadding)
@@ -110,7 +111,7 @@ private fun ItemDetailsBody(
             onClick = onSellItem,
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
-            enabled = true
+            enabled = !itemDetailsUiState.outOfStock
         ) {
             Text(stringResource(R.string.sell))
         }
